@@ -59,9 +59,10 @@ describe('Creating model instances', function(){
         }
         var eventInstance = Event.parse(instanceData)
 
-        expect(eventInstance.name === instanceData.name)
-        expect(eventInstance.id === instanceData.id)
-        expect(eventInstance.duration === instanceData.duration)
+        expect(eventInstance.name).to.eql(instanceData.name)
+        expect(eventInstance.id).to.eql(instanceData.id)
+        expect(eventInstance.duration).to.eql(instanceData.duration)
+
     }),
     it("Should reject property type based on created Model", function(){
 
@@ -104,15 +105,126 @@ describe('Creating model instances', function(){
         var Event = new Model(data)
 
         var instanceData = {
-            name : 'Event',
             id : 1,
             duration : new Date()
         }
 
         expect(Event.parse.bind(Event, instanceData)).to.throw()
     })
-})
+    it("Should'nt reject object with missing non-required data", function(){
+        
+        var data = {
+            name : { type: 'String', required: false },
+            id : 'Number',
+            duration : 'Object'
+        }
+        
+        var Event = new Model(data)
 
-describe("Invalid properties handling", function(){
+        var instanceData = {
+            id : 1,
+            duration : new Date()
+        }
+
+        var eventInstance = Event.parse(instanceData)
+
+        expect(eventInstance).to.not.haveOwnProperty('name')
+        expect(eventInstance.id).to.eql(instanceData.id)
+        expect(eventInstance.duration).to.eql(instanceData.duration)
+    })
+})
+describe("Different type comparison", function () {
+    it("Should reject non-strings on keyword String", function(){
+        var modelData = {
+            property : 'String'
+        }
+        
+        var Event = new Model(modelData)
+
+        var instanceData = {
+            property : 6
+        }
+
+        expect(Event.parse.bind(Event, instanceData)).to.throw()
+
+    }), 
+    it("Should accept Strings on keyword String", function(){
+        var modelData = {
+            property : 'String'
+        }
+        
+        var Event = new Model(modelData)
+
+        var instanceData = {
+            property : 'Event'
+        }
+
+        var eventInstance = Event.parse(instanceData)
+
+        expect(eventInstance.property).to.eql(instanceData.property)
+    }),    
+    it("Should reject non-numbers on keyword Number", function(){
+        var modelData = {
+            property : 'Number'
+        }
+        
+        var Event = new Model(modelData)
+
+        var instanceData = {
+            property : 'Event'
+        }
+
+        expect(Event.parse.bind(Event, instanceData)).to.throw()
+    }),
+    it("Should accept numbers on keyword Number", function(){
+        var modelData = {
+            property : 'Number'
+        }
+        
+        var Event = new Model(modelData)
+    
+        var instanceData = {
+            property : 6
+        }
+    
+        var eventInstance = Event.parse(instanceData)
+    
+        expect(eventInstance.property).to.eql(instanceData.property)
+    }),
+    it("Should reject non-Objects on keyword Object", function(){
+                var modelData = {
+            property : 'Object'
+        }
+        
+        var Event = new Model(modelData)
+
+        var instanceData = {
+            property : 5
+        }
+
+        expect(Event.parse.bind(Event, instanceData)).to.throw()
+    }),
+    it("Should accept Objects on keyword Object", function(){
+        var modelData = {
+            property : 'Object'
+        }
+        
+        var Event = new Model(modelData)
+    
+        var instanceData = {
+            property : new Date()
+        }
+    
+        var eventInstance = Event.parse(instanceData)
+    
+        expect(eventInstance.property).to.eql(instanceData.property)
+    }),
+    it("Should reject non-Arrays on keyword Array"),
+    it("Should reject non-String Arrays on keyword non-String Arrays"),
+    it("Should reject numbers smaller then specified number"),
+    it("Should reject non-CustomObjects on keyword <CustomObject>")
+})
+describe("Invalid model creation handling", function(){
     it("Should list the invalid property")
+    it("Should list the required properties")
 })
