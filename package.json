@@ -1,0 +1,11 @@
+{
+  "name": "validationmodel",
+  "version": "1.0.0",
+  "description": "Simple validation model using validate.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "zetiko8",
+  "license": "ISC"
+}
