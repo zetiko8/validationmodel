@@ -1,6 +1,6 @@
 var expect = require('chai').expect
 
-var Model = require('../src/model-lv2')
+var Model = require('../src/index')
 
 describe('Model definition', function(){
     it("Should create a new Model", function(){
@@ -192,7 +192,7 @@ describe("Different type comparison", function () {
         expect(eventInstance.property).to.eql(instanceData.property)
     }),
     it("Should reject non-Objects on keyword Object", function(){
-                var modelData = {
+        var modelData = {
             property : 'Object'
         }
         
@@ -219,7 +219,17 @@ describe("Different type comparison", function () {
     
         expect(eventInstance.property).to.eql(instanceData.property)
     }),
-    it("Should reject non-Arrays on keyword Array"),
+    it("Should reject non-Arrays on keyword Array", function(){
+        var Event = new Model({
+            property : 'Array'
+        })
+
+        var instanceData = {
+            property : 3
+        }
+
+        expect(Event.parse.bind(Event, instanceData)).to.throw()
+    }),
     it("Should reject non-String Arrays on keyword non-String Arrays"),
     it("Should reject numbers smaller then specified number"),
     it("Should reject non-CustomObjects on keyword <CustomObject>")

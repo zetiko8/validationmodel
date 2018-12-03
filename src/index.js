@@ -1,14 +1,11 @@
-var ArchModel = require('./model')
-
 var Exception = function (e) {
     if ( e.invalidProperties ) this.invalidProperties = e.invalidProperties
     if ( e.missingProperties ) this.missingProperties = e.missingProperties
 }
 
-module.exports = class Model extends ArchModel {
+module.exports = class Model {
 
     constructor(data) {
-        super()
 
         for (var key in data) {
 
@@ -59,8 +56,8 @@ module.exports = class Model extends ArchModel {
                 return false
             }
         }
-        if (keyword === 'Object') {
-            if (typeof data === "object") {
+        if (keyword === 'Array') {
+            if (Array.isArray(data)) {
                 return true
             } else {
                 return false
@@ -105,4 +102,6 @@ module.exports = class Model extends ArchModel {
         else return true
     }
 }
+
+
 

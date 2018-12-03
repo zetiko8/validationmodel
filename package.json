@@ -8,9 +8,7 @@
   },
   "author": "zetiko8",
   "license": "ISC",
-  "dependencies": {
-    "validator": "^10.8.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0"
