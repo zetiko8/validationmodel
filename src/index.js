@@ -3,6 +3,8 @@ var Exception = function (e) {
     if ( e.missingProperties ) this.missingProperties = e.missingProperties
 }
 
+var validateTypes = require('./validateTypes')
+
 module.exports = class Model {
 
     constructor(data) {
@@ -34,44 +36,12 @@ module.exports = class Model {
 
     }
 
-    validate(keyword, data) {
-        if (keyword === 'String') {
-            if (typeof data === "string") {
-                return true
-            } else {
-                return false
-            }
-        }
-        if (keyword === 'Number') {
-            if (typeof data === "number") {
-                return true
-            } else {
-                return false
-            }
-        }
-        if (keyword === 'Object') {
-            if (typeof data === "object") {
-                return true
-            } else {
-                return false
-            }
-        }
-        if (keyword === 'Array') {
-            if (Array.isArray(data)) {
-                return true
-            } else {
-                return false
-            }
-        }
-        return true
-    }
-
     compareTypes(obj, dataKey, data) {
 
         let invalidProperties = []
         for(var modelKey in this){
             if( dataKey === modelKey ) {
-                if(this.validate(this[modelKey].type, data[dataKey])){
+                if(validateTypes(this[modelKey].type, data[dataKey])){
                     obj[dataKey] = data[dataKey]
                 } else {
                     invalidProperties.push(dataKey)
