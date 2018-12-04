@@ -24,6 +24,12 @@ describe('Model definition', function () {
         expect(Event.property3 === 'Object')
 
     })
+    it("Should reject models with unknown type declaration", function (){
+        var Event = new Model({
+            property2: "String",
+            property1 : 'Lord' 
+        })
+    })
     it("Should handle values min and max", function () {
 
         var data = {

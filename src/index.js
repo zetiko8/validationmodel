@@ -7,18 +7,7 @@ var validateTypes = require('./validateTypes')
 
 module.exports = class Model {
 
-    constructor(data) {
-        
-        for (var key in data) {
-
-            if (!data[key].type) {
-                this[key] = { type: data[key] }
-            } else {
-                this[key] = data[key]
-            }
-        }
-        
-    }
+    constructor(data) {require('./constructor')(this, data)}
 
     parse(data) {
 
