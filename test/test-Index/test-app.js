@@ -1,47 +1,8 @@
 var expect = require('chai').expect
 
-var Model = require('../src/index')
+var Model = require('../../src/index')
 
-describe('Model definition', function () {
-    it("Should create a new Model", function () {
-        var Event = new Model({
-            property: 'String'
-        })
 
-        expect(Event instanceof Object)
-    })
-    it("Created Model should have same properties as data object", function () {
-        var data = {
-            property1: 'String',
-            property2: 'Number',
-            property3: 'Object'
-        }
-
-        var Event = new Model(data)
-
-        expect(Event.property1 === 'String')
-        expect(Event.property2 === 'Number')
-        expect(Event.property3 === 'Object')
-
-    })
-    it("Should reject models with unknown type declaration", function (){
-        var Event = new Model({
-            property2: "String",
-            property1 : 'Lord' 
-        })
-    })
-    it("Should handle values min and max", function () {
-
-        var data = {
-            name: { type: 'String', required: false, min: 3, max: 8 },
-        }
-
-        var Event = new Model(data)
-
-        expect(Event.name).to.haveOwnProperty('min')
-        expect(Event.name).to.haveOwnProperty('max')
-    })
-})
 
 describe('Creating model instances', function () {
     it("Should create an instance of created Model", function () {
