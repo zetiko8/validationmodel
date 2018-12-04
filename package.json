@@ -2,7 +2,7 @@
   "name": "validationmodel",
   "version": "1.0.0",
   "description": "Simple validation model using validate.js",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "test"
   },
