@@ -8,7 +8,9 @@
   },
   "author": "zetiko8",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "underscore": "^1.9.1"
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0"
